@@ -33,7 +33,6 @@ class Connexion extends Component {
                         required />
                     <button type="submit">GO</button>    
                 </form>
-
             </div>
          );
     }
