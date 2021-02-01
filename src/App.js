@@ -6,6 +6,10 @@ import Message from './components/Message'
 // Firebase
 import base from './base'
 
+// Animations 
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
+import './animations.css'
+
 class App extends Component {
   state = {
     messages: {},
@@ -42,12 +46,17 @@ class App extends Component {
   render() { 
     const messages = Object.keys(this.state.messages).map(
       key => (
-        <Message 
+        <CSSTransition
           key={key}
-          isUser={this.isUser}
-          pseudo={this.state.messages[key].pseudo}
-          message={this.state.messages[key].message}
-        />
+          timeout={200}
+          classNames='fade'
+        >
+          <Message 
+            isUser={this.isUser}
+            pseudo={this.state.messages[key].pseudo}
+            message={this.state.messages[key].message}
+          />
+        </CSSTransition>
       )
     )
 
@@ -56,9 +65,9 @@ class App extends Component {
       <div className="box">
         <div>
           <div className="messages" ref={this.messagesRef}>
-            <div className="message">
+            <TransitionGroup className="message">
              {messages}
-            </div>
+            </TransitionGroup>
           </div>
         </div>
         <Formulaire 
